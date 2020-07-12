@@ -70,10 +70,8 @@ stamp-h1
 # Ignore GYP generated Visual Studio artifacts.
 *.filters
 *.sdf
-*.sln
 *.suo
-*.vcproj
-*.vcxproj
+*.vcxproj.user
 
 # Ignore GYP generated Makefiles
 src/Makefile
