@@ -50,6 +50,28 @@
 #include "elf_reader.h"
 #include "common/using_std_string.h"
 
+// TODO: Ruslan - добавлено для компиляции в mingw 4.8
+#include <sys/param.h>
+#include <sys/mingw.h>
+#define __BIG_ENDIAN    BIG_ENDIAN
+#define __LITTLE_ENDIAN	LITTLE_ENDIAN
+#define __BYTE_ORDER	BYTE_ORDER
+
+#if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
+
+# include <windows.h>
+
+int
+getpagesize (void)
+{
+  SYSTEM_INFO system_info;
+  GetSystemInfo (&system_info);
+  return system_info.dwPageSize;
+}
+
+#endif
+// TODO: Ruslan ---
+
 // EM_AARCH64 is not defined by elf.h of GRTE v3 on x86.
 // TODO(dougkwan): Remove this when v17 is retired.
 #if !defined(EM_AARCH64)
